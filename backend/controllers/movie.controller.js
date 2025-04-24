@@ -40,3 +40,29 @@ export const getMovieDetails = async (req, res) => {
     console.log("Error in getMovieDetails Controller: ", error.message);
   }
 };
+
+export const getSimilarMovies = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const data = await fetchFromTMDB(
+      `https://api.themoviedb.org/3/movie/${id}/similar?language=en-US&page=1`
+    );
+    res.json({ success: true, similar: data.results });
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error!" });
+    console.log("Error in getSimilarMovies Controller: ", error.message);
+  }
+};
+
+export const getMoviesByCategory = async (req, res) => {
+  const { category } = req.params;
+  try {
+    const data = await fetchFromTMDB(
+      `https://api.themoviedb.org/3/movie/${category}?language=en-US&page=1`
+    );
+    res.json({ success: true, content: data.results });
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error!" });
+    console.log("Error in getMoviesByCategory Controller: ", error.message);
+  }
+};
