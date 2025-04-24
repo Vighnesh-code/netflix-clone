@@ -1,5 +1,6 @@
 import express from "express";
 import authRoutes from "./routes/auth.route.js";
+import movieRoutes from "./routes/movie.route.js";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 dotenv.config();
@@ -9,7 +10,9 @@ const port = process.env.PORT;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/movie", movieRoutes);
 
 app.listen(port, () => {
   connectDB();
