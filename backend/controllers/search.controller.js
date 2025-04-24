@@ -26,7 +26,7 @@ export const searchPerson = async (req, res) => {
 
     res.status(200).json({ success: true, content: response.results });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error!" });
+    res.status(500).json({ success: false, message: "Internal Server Error!" });
     console.log("Error in searchPerson Controller: ", error.message);
   }
 };
@@ -56,7 +56,7 @@ export const searchMovie = async (req, res) => {
 
     res.status(200).json({ success: true, content: response.results });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error!" });
+    res.status(500).json({ success: false, message: "Internal Server Error!" });
     console.log("Error in searchMovie Controller: ", error.message);
   }
 };
@@ -86,7 +86,39 @@ export const searchTv = async (req, res) => {
 
     res.json({ success: true, content: response.results });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error!" });
+    res.status(500).json({ success: false, message: "Internal Server Error!" });
     console.log("Error in searchTv Controller: ", error.message);
+  }
+};
+
+export const getSearchHistory = async (req, res) => {
+  try {
+    res.status(200).json({ success: true, content: req.user.searchHistory });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Internal Server Error!" });
+    console.log("Error in getSearchHistory Controller: ", error.message);
+  }
+};
+
+export const removeItemFromSearchHistory = async (req, res) => {
+  let { id } = req.params;
+  id = parseInt(id);
+
+  try {
+    await User.findByIdAndUpdate(req.user._id, {
+      $pull: {
+        searchHistory: { id },
+      },
+    });
+
+    res
+      .status(200)
+      .json({ success: true, message: "Item removed from search history" });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Internal Server Error!" });
+    console.log(
+      "Error in removeItemFromSearchHistory Controller: ",
+      error.message
+    );
   }
 };
