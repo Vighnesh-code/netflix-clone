@@ -14,3 +14,16 @@ export const getTrendingMovie = async (req, res) => {
     console.log("Error in getTrendingMovie Controller: ", error.message);
   }
 };
+
+export const getMovieTrailer = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const data = await fetchFromTMDB(
+      `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`
+    );
+    res.json({ success: true, trailer: data.results });
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error!" });
+    console.log("Error in getMovieTrailer Controller: ", error.message);
+  }
+};
