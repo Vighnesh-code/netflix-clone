@@ -27,3 +27,16 @@ export const getMovieTrailer = async (req, res) => {
     console.log("Error in getMovieTrailer Controller: ", error.message);
   }
 };
+
+export const getMovieDetails = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const data = await fetchFromTMDB(
+      `https://api.themoviedb.org/3/movie/${id}?language=en-US`
+    );
+    res.json({ success: true, content: data });
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error!" });
+    console.log("Error in getMovieDetails Controller: ", error.message);
+  }
+};
