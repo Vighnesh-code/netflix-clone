@@ -5,6 +5,7 @@ import { toast } from "react-hot-toast";
 export const useAuthStore = create((set) => ({
   user: null,
   isSigningUp: false,
+  isLoggingIn: false,
   isCheckingAuth: true,
   isLoggingOut: false,
   signUp: async (credentials) => {
@@ -18,7 +19,18 @@ export const useAuthStore = create((set) => ({
       set({ isSigningUp: false, user: null });
     }
   },
-  logIn: async () => {},
+  logIn: async (credentials) => {
+    set({ isLoggingIn: true });
+    try {
+      const res = await axios.post("/api/v1/auth/login", credentials);
+      set({ user: res.data.user, isLoggingIn: false });
+      toast.success("Logged In Successfully!");
+    } catch (error) {
+      toast.error(error.response.data.message);
+      set({ user: null, isLoggingIn: false });
+    }
+  },
+
   logOut: async () => {
     set({ isLoggingOut: true });
     try {

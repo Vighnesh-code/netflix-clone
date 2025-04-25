@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuthStore } from "../store/authUser";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { logIn, isLoggingIn } = useAuthStore();
+
   const handleSignIn = (e) => {
     e.preventDefault();
-    console.log("Email: ", email);
-    console.log("Password: ", password);
-    setEmail("");
-    setPassword("");
+    logIn({ email, password });
   };
 
   return (
@@ -63,7 +63,7 @@ const LoginPage = () => {
               />
             </div>
             <button className="w-full py-2 bg-red-600 text-white font-semibold rounded-md hover:bg-red-700">
-              Log In
+              {isLoggingIn ? "Logging in..." : "Log In"}
             </button>
           </form>
 
