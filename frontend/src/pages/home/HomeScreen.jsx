@@ -1,19 +1,10 @@
 import React from "react";
-import { useAuthStore } from "../../store/authUser";
+import Navbar from "../../components/Navbar";
 
 const HomeScreen = () => {
-  const { logOut, isLoggingOut } = useAuthStore();
-  const handleLogout = (e) => {
-    e.preventDefault();
-    logOut();
-  };
-
   return (
-    <div>
-      <h1>HomeScreen</h1>
-      <button onClick={handleLogout} className="text-red-500 bg-black">
-        {isLoggingOut ? "Logging Out..." : "LogOut"}
-      </button>
+    <div className="relative h-screen text-white bg-black">
+      <Navbar />
     </div>
   );
 };
