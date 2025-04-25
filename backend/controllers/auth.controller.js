@@ -52,7 +52,7 @@ export const signUp = async (req, res) => {
     await newUser.save();
     res.status(201).json({
       success: true,
-      data: {
+      user: {
         _id: newUser._id,
         username: newUser.username,
         email: newUser.email,
@@ -116,6 +116,15 @@ export const logout = async (req, res) => {
     res.status(200).json({ success: true, message: "Logged Out Successfully" });
   } catch (error) {
     console.log("Error In Logout Controller: ", error.message);
+    res.status(500).json({ success: false, message: "Internal Server Error!" });
+  }
+};
+
+export const authCheck = async (req, res) => {
+  try {
+    res.status(200).json({ success: true, user: req.user });
+  } catch (error) {
+    console.log("Error In authCheck Controller: ", error.message);
     res.status(500).json({ success: false, message: "Internal Server Error!" });
   }
 };
