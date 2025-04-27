@@ -16,6 +16,12 @@ const HomeScreen = () => {
   const { contentType } = useContentStore();
   const [imgLoading, setIsImgLoading] = useState(true);
 
+  useEffect(() => {
+    if (trendingContent) {
+      console.log("[Trending Content]: ", trendingContent);
+    }
+  }, [trendingContent]);
+
   if (!trendingContent)
     return (
       <div className="h-screen text-white relative">
@@ -23,12 +29,6 @@ const HomeScreen = () => {
         <div className="absolute top-0 left-0 w-full h-full bg-black/70 flex items-center justify-center -z-10 shimmer" />
       </div>
     );
-
-  useEffect(() => {
-    if (trendingContent) {
-      console.log("[Trending Content]: ", trendingContent);
-    }
-  }, [trendingContent]);
 
   return (
     <>
