@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { SMALL_IMG_BASE_URL } from "../utils/constants";
+import { Trash } from "lucide-react";
+import toast from "react-hot-toast";
 
 const SearchHistoryPage = () => {
   const [searchHistory, setSearchHistory] = useState([]);
@@ -59,6 +61,15 @@ const SearchHistoryPage = () => {
     );
   }
 
+  const handleDelete = async (entry) => {
+    try {
+      await axios.delete(`/api/v1/search/history/${entry.id}`);
+      setSearchHistory(searchHistory.filter((item) => item.id !== entry.id));
+    } catch (error) {
+      toast.error("Failed to delete search item");
+    }
+  };
+
   return (
     <div className="bg-black text-white min-h-screen">
       <Navbar />
@@ -93,8 +104,13 @@ const SearchHistoryPage = () => {
                       : "bg-green-600"
                   }`}
                 >
-                  {entry.searchType}
+                  {entry.searchType[0].toUpperCase() +
+                    entry.searchType.slice(1)}
                 </span>
+                <Trash
+                  className="size-5 ml-4 cursor-pointer hover:fill-red-600 hover:text-red-600"
+                  onClick={() => handleDelete(entry)}
+                />
               </div>
             );
           })}
