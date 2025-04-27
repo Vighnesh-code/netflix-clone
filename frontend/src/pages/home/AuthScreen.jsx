@@ -46,7 +46,7 @@ const AuthScreen = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <button className="bg-red-600 text-xl lg:text-2xl px-2 lg:px-6 py-1 md:py-2 rounded flex justify-center items-center cursor-pointer hover:bg-red-800 hover:text-slate-300">
+          <button className="bg-red-600 text-xl lg:text-xl px-2 lg:px-6 py-1 md:py-2 rounded flex justify-center items-center cursor-pointer hover:bg-red-800 hover:text-slate-300">
             Get Started
             <ChevronRight className="size-8 md:size-10" />
           </button>
