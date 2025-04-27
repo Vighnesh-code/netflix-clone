@@ -68,13 +68,11 @@ const WatchPage = () => {
 
   const handlePrev = () => {
     if (currentTrailerIdx > 0) setCurrentTrailerIdx(currentTrailerIdx - 1);
-    console.log("Current Trailer Id: ", currentTrailerIdx);
   };
 
   const handleNext = () => {
     if (currentTrailerIdx < trailers.length)
       setCurrentTrailerIdx(currentTrailerIdx + 1);
-    console.log("Current Trailer Id: ", currentTrailerIdx);
   };
 
   const scrollLeft = () => {

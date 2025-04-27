@@ -20,7 +20,6 @@ const MovieSlider = ({ category }) => {
     const getContent = async () => {
       const res = await axios.get(`/api/v1/${contentType}/${category}`);
       setContent(res.data.content);
-      console.log("Content: ", content);
     };
 
     getContent();
