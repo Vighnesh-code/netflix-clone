@@ -63,6 +63,7 @@ const WatchPage = () => {
       }
     };
 
+    console.log("Content: ", content);
     getContentDetails();
   }, [contentType, id]);
 
