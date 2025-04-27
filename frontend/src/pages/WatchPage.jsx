@@ -102,7 +102,7 @@ const WatchPage = () => {
       </div>
     );
 
-  if (!content) {
+  if (content === null) {
     return (
       <div className="bg-black text-white h-screen">
         <div className="max-w-6xl mx-auto">
