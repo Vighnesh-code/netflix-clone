@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import { Link } from "react-router-dom";
 import { Info, Play } from "lucide-react";
@@ -24,6 +24,12 @@ const HomeScreen = () => {
       </div>
     );
 
+  useEffect(() => {
+    if (trendingContent) {
+      console.log("[Trending Content]: ", trendingContent);
+    }
+  }, [trendingContent]);
+
   return (
     <>
       <div className="relative h-screen text-white">
@@ -41,6 +47,7 @@ const HomeScreen = () => {
             setIsImgLoading(false);
           }}
         />
+
         <div
           className="absolute top-0 left-0 w-full h-full bg-black/50 -z-50"
           aria-hidden="true"
