@@ -13,6 +13,9 @@ const Navbar = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  const image = ["/avatar1.png", "/avatar2.png", "/avatar3.png"];
+  const randomImage = image[Math.floor(Math.random() * image.length)];
+
   return (
     <header className="max-w-6xl mx-auto flex flex-wrap items-center justify-between p-4 h-20">
       <div className="flex items-center gap-10 z-50">
@@ -51,7 +54,7 @@ const Navbar = () => {
           <Search className="size-6 cursor-pointer" />
         </Link>
         <img
-          src={user.image}
+          src={randomImage}
           alt="Avatar"
           className="h-8 rounded cursor-pointer"
         />
